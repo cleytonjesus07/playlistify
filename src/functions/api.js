@@ -38,6 +38,11 @@ export async function updateTimesPlayed(data) {
     return true;
 }
 
+export async function getAllCategories() {
+    let { data, error } = await sbDB.from("Categories").select("id_category,title_category,Composers(id_composer,name_composer,image_composer)");
+    if (error) return console.error(error.message);
+    return data;
+}
 
 
 

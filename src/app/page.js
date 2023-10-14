@@ -2,7 +2,7 @@ import Container from "@/components/Container";
 import { FaEarListen } from "react-icons/fa6";
 import Category from "@/components/Home/categories";
 import MostListening from "@/components/Home/mostListening";
-import { mostListening } from "./funtions";
+import { mostListening } from "./functions";
 
 export default async function Home() {
     return (

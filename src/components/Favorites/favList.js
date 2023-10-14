@@ -26,7 +26,7 @@ export default function FavList({ songs }) {
                 (
                     songs?.filter(({ Song }) => favoritesIds?.includes(Song.id))?.map(({ Song: { id, title }, Artist }, i) => (
                         <Link key={id} href={`/artists/${encodeURL(Artist.id)}-${encodeURL(id)}`}>
-                            <Container className={`flex flex-1 items-center cursor-pointer gap-5 rounded-xl overflow-hidden scale-95 transition-all ease-in-out  hover:bg-senary-color hover:scale-100 group`}>
+                            <Container className={`flex flex-1 items-center cursor-pointer gap-5 rounded-xl overflow-hidden scale-95 hover:bg-senary-color hover:scale-100 group`}>
                                 < div className="bg-senary-color p-5 text-white">{i + 1}</div>
                                 <div className={`flex-1 text-senary-color group-hover:text-white line-clamp-1`}>{title}</div>
                             </Container>

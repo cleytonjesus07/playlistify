@@ -1,7 +1,7 @@
 import { MdFavorite } from "react-icons/md"
 import FavList from "../../components/Favorites/favList";
 import Container from "@/components/Container";
-import { getAllSongs } from "../funtions";
+import { getAllSongs } from "../functions";
 
 export default async function Favorites() {
     const songs = await getAllSongs();
