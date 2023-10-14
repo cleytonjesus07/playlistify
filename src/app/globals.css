@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&family=Sniglet&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Pixelify Sans', cursive;
+}
+
+.icon {
+  color: #61567d;
+  filter: drop-shadow(#473080 -3px 4px);
+}
+
+.sombra {
+  filter: drop-shadow(#4730809a -7px 7px);
+}
+
+.colorDefault {
+  color: #61567d;
+}
+
+.noScroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* audio */
+
+audio {
+  width: 400px;
+  height: 30px;
+
+}
+
+
+
+audio::-webkit-media-controls-panel {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  -webkit-user-select: none;
+  position: relative;
+  width: 100%;
+  z-index: 0;
+  overflow: hidden;
+  text-align: right;
+  bottom: auto;
+  height: 30px;
+  background-color: #4730809a;
+  transition: opacity 0.3s;
+}
+
+/* SoundWave */
+.box {
+  transform: scaleY(.4);
+  animation-duration: 1.2s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.box1 {
+  animation-name: quiet;
+}
+
+.box2 {
+  animation-name: normal;
+}
+
+.box3 {
+  animation-name: quiet;
+}
+
+.box4 {
+  animation-name: loud;
+}
+
+.box5 {
+  animation-name: quiet;
+}
+
+@keyframes quiet {
+  25% {
+    transform: scaleY(.6);
+  }
+
+  50% {
+    transform: scaleY(.4);
+  }
+
+  75% {
+    transform: scaleY(.8);
+  }
+}
+
+@keyframes normal {
+  25% {
+    transform: scaleY(1);
+  }
+
+  50% {
+    transform: scaleY(.4);
+  }
+
+  75% {
+    transform: scaleY(.6);
+  }
+}
+
+@keyframes loud {
+  25% {
+    transform: scaleY(1);
+  }
+
+  50% {
+    transform: scaleY(.4);
+  }
+
+  75% {
+    transform: scaleY(1.2);
+  }
+}
