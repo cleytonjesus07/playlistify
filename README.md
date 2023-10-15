@@ -1,8 +1,4 @@
-<div style="display:flex">
-<img src="./public/favicon.ico" width="40" height="40"> 
 <h1>PlayListify</h1>
-</div>
-
 
 EN-US - What is it?🤔
 =====================
