@@ -5,6 +5,7 @@ import Slide from "@/components/Slide";
 import { getArtistsByCategory } from "@/functions/api";
 import Link from "next/link";
 import { encodeURL } from "@/functions/serverUtils/utils";
+import { shuffleArray } from "@/functions/clientUtils/util";
 
 async function getByCategory() {
     const res2 = await getArtistsByCategory();
@@ -39,7 +40,7 @@ export default async function Category() {
                             <Link href={`/category/${encodeURL(title).replace(/=/g, '')}`} className="font-normal text-sm  text-senary-color hover:text-white hover:bg-senary-color px-2 rounded-md">Ver todas</Link>
                         </Container>
                         <Container className="flex gap-5 overflow-hidden">
-                            <Slide Artists={Artists} />
+                            <Slide Artists={shuffleArray(Artists)} />
                         </Container>
                     </React.Fragment>
                 )

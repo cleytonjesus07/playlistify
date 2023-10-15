@@ -21,7 +21,7 @@ export default function FavList({ songs }) {
         <>
             {(!favoritesIds?.length)
                 ?
-                (<span className="flex justify-center p-5 text-center text-lg text-senary-color bg-primary-color rounded-full"><FaHeartBroken className="w-6 h-6 mr-5" /> Você ainda não selecionou nenhuma música como favorita</span>)
+                (<span className="flex justify-center p-5 text-center text-lg text-senary-color bg-primary-color rounded-full"><FaHeartBroken className="w-6 h-6 mr-5 max-sm:hidden" /> Você ainda não selecionou nenhuma música como favorita</span>)
                 :
                 (
                     songs?.filter(({ Song }) => favoritesIds?.includes(Song.id))?.map(({ Song: { id, title }, Artist }, i) => (
