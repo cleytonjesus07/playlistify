@@ -1,36 +1,3 @@
-<style>
-
-.containerTitle{
-    display:flex;
-    align-items:center;
-}
-
-.containerTitle img{
-    width:40px;
-    height:40px;
-}
-
-.header {
-    display: flex;
-    align-items: center;
-}
-
-.header img {
-    width: 40px;
-    height: auto;
-}
-
-.header span {
-    font-size: 2em;
-    font-weight: bold;
-    margin-left: .2em;
-}
-
-.tag{
-    font-weight:bold;
-}
-</style>
-
 <div class="header">
     <img src="public/favicon.ico"/>
     <span >PlayListify</span>
