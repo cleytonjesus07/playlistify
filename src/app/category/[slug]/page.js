@@ -12,7 +12,7 @@ export default async function Category({ params }) {
             <Container className="flex items-center p-5 ">
                 <div className="font-semibold text-lg ml-5 text-senary-color">{`${decodeURL(params.slug)} ( ${artistLength} )`}</div>
             </Container>
-            <section className="flex flex-wrap my-5 gap-3">
+            <section className="flex flex-wrap my-5 gap-3 max-md:justify-center">
                 {artistsByCategories?.filter(({ Category }) => Category.title === decodeURL(params.slug))
                     .map(({ Category: { Artist } }) => (
                         Artist.map(({ id, name, avatar }) => (
