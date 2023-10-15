@@ -7,29 +7,31 @@ import { handleSlide } from "@/functions/components/slide";
 import { encodeURL } from "@/functions/serverUtils/utils";
 
 export default function Slide({ Artists }) {
-    /* const arrArtistRef = useRef([...Artists]);
-    const [arrArtist, setArrArtist] = useState(Artists); */
-    const [hide, setHide] = useState(false);
+    const arrArtistRef = useRef([...Artists]);
     const sliderRef = useRef();
     const leftBtn = useRef();
     const rightBtn = useRef();
-    /*  const checkWidth = () => {
-         const wScreen = window.innerWidth;
-         if (wScreen <= 640) {
-             setArrArtist(arrArtistRef.current.slice(0, 1))
-             setHide(true);
-             return;
-         }
-         setArrArtist(arrArtistRef.current.slice(0, 4))
-         setHide(false);
-     } */
-    /* useEffect(() => checkWidth()); */
-    useEffect(() => handleSlide(sliderRef.current, leftBtn.current, rightBtn.current), []);
-    /*  useEffect(() => {
-         window.addEventListener("resize", checkWidth);
-         return () => window.removeEventListener("resize", checkWidth);
-     }, []) */
 
+    const [arrArtist, setArrArtist] = useState([]);
+    const [hide, setHide] = useState(false);
+
+    const checkWidth = () => {
+        const wScreen = window.innerWidth;
+
+        if (wScreen <= 640) {
+            setArrArtist(arrArtistRef.current.slice(0, 1));
+            setHide(true);
+        } else {
+            setArrArtist(arrArtistRef.current.slice(0, 4));
+            setHide(false);
+        }
+    };
+    useEffect(() => {
+        checkWidth()
+        window.addEventListener("resize", checkWidth);
+        return () => window.removeEventListener("resize", checkWidth);
+    }, []);
+    useEffect(() => handleSlide(sliderRef.current, leftBtn.current, rightBtn.current), []);
 
     return (
         <>
@@ -39,7 +41,7 @@ export default function Slide({ Artists }) {
                 </div>
             )}
             <div ref={sliderRef} className="flex gap-2 overflow-x-auto overflow-hidden w-full relative p-5 noScroll !scroll-smooth max-sm:justify-center " >
-                {Artists.map(({ id, name, avatar }) => (
+                {arrArtist.map(({ id, name, avatar }) => (
                     <Link key={id} href={`/artists/${encodeURL(id)}`}>
                         <Card container_className={"p-5 scale-95 hover:scale-100 cursor-pointer transition-all ease-in-out flex flex-col justify-center items-center max-w-[200px]"} title_className={"block text-center text-senary-color font-extrabold line-clamp-1 break-normal"} avatar={avatar} name={name} />
                     </Link>
