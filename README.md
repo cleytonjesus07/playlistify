@@ -1,6 +1,6 @@
-<div class="header">
-    <img src="public/favicon.ico"/>
-    <span >PlayListify</span>
+<div style="display:flex;align-items:center">
+    <img style="width:40px;height:40px" src="public/favicon.ico"/>
+    <span style="font-weight:bold;font-size:3em;margin-left:.2em">PlayListify</span>
 </div>
 <hr/>
 
