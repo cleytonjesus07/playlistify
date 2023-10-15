@@ -11,13 +11,13 @@ export default async function Songs({ params }) {
 
     return (
         <>
-            <section className="flex">
-                <div className="relative w-80 h-60 rounded-xl overflow-hidden border-8 border-solid border-senary-color bg-senary-color">
+            <section className="flex max-md:flex-col max-md:items-center max-md:justify-center max-md:gap-5">
+                <div className="relative w-80 h-60 rounded-xl overflow-hidden border-8 border-solid border-senary-color bg-senary-color max-md:flex">
                     <Image alt="Composer image" priority={true} src={artistSelected.avatar} fill={true} sizes="100%" className="object-cover object-center" />
                 </div>
                 <div className="flex-1 flex justify-center items-center flex-col gap-2">
                     <span className="text-3xl text-senary-color">Artista</span>
-                    <span className="text-5xl text-senary-color font-extrabold">{artistSelected.name}</span>
+                    <span className="text-5xl text-senary-color font-extrabold max-md:text-3xl">{artistSelected.name}</span>
                 </div>
             </section>
             <section className="w-full mt-5">
