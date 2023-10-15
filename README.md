@@ -1,5 +1,16 @@
 <style>
-    .header {
+
+.containerTitle{
+    display:flex;
+    align-items:center;
+}
+
+.containerTitle img{
+    width:40px;
+    height:40px;
+}
+
+.header {
     display: flex;
     align-items: center;
 }
@@ -25,7 +36,53 @@
     <span >PlayListify</span>
 </div>
 <hr/>
-<h1 class="title">O que é?🤔 </h1>
+
+<h1 class="title">EN-US - What is it?🤔</h1>
+<p>
+    🎶 <span class="tag">PlayListify</span> is a music application that serves as a music library for you to listen to some songs during your daily tasks.
+</p>
+<hr/>
+<h1>Application Screens 🖥️(Desktop)</h1>
+<h3>Home:</h3>
+<img src="./pics/desktop/home.jpeg">
+<h3>List of Artists:</h3>
+<img src="./pics/desktop/artistlist.jpeg">
+<h3>List of Artists by Category:</h3>
+<img src="./pics/desktop/byCategory.jpeg">
+<h3>All Listed Categories:</h3>
+<img src="./pics/desktop/allcategories.jpeg">
+<h3>List of Songs Marked as Favorites:</h3>
+<span>No songs selected</span>
+<img src="./pics/desktop/noFavorites.jpeg">
+<span>With songs selected</span>
+<img src="./pics/desktop/favorites.jpeg">
+<hr/>
+<h1>Application Screens 📱(Mobile)</h1>
+<h3>Home:</h3>
+<img src="./pics/mobile/home.jpeg">
+<h3>List of Artists:</h3>
+<img src="./pics/mobile/artistlist.jpeg">
+<h3>List of Artists by Category:</h3>
+<img src="./pics/mobile/byCategory.jpeg">
+<h3>All Listed Categories:</h3>
+<img src="./pics/mobile/allcategories.jpeg">
+<h3>List of Songs Marked as Favorites:</h3>
+<span>No songs selected</span>
+<img src="./pics/mobile/noFavorites.jpeg">
+<span>With songs selected</span>
+<img src="./pics/mobile/favorites.jpeg">
+<hr/>
+
+<section>
+    <p>The project is for learning purposes only and is still in development.</p>
+</section>
+
+<hr/>
+<hr/>
+<hr/>
+<hr/>
+    
+<h1 class="title">PT-BR - O que é?🤔 </h1>
 <p>
     🎶 <span class="tag">PlayListify</span> É uma aplicação de músicas na qual consiste em ser um acervo musical apenas para que você possa ouvir algumas músicas durante as suas tarefas diárias. 
 </p>
