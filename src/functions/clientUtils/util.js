@@ -6,6 +6,8 @@ export const saveFavoriteSongsIds = (data) => {
     return;
 }
 
+export const removeLocalstorageItem = () => localStorage.removeItem(keyStorage);
+
 export const getFavoriteSongsIds = () => {
     const data = localStorage.getItem(keyStorage);
     if (!data) return null;

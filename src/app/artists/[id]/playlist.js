@@ -3,7 +3,7 @@ import { AiOutlineStar, AiFillStar } from "react-icons/ai"
 import { useState, useEffect } from "react"
 import Container from "@/components/Container"
 import { useCurrentSong } from "@/store/currentSong"
-import { getFavoriteSongsIds, saveFavoriteSongsIds } from "@/functions/clientUtils/util"
+import { getFavoriteSongsIds, removeLocalstorageItem, saveFavoriteSongsIds } from "@/functions/clientUtils/util"
 
 export default function Playlist({ artistSelected: { name }, songs, songRequired }) {
     const { currentSong, setCurrentSong, isPlaying } = useCurrentSong();
@@ -25,8 +25,9 @@ export default function Playlist({ artistSelected: { name }, songs, songRequired
 
     function handleRemoveFavorite(id_song) {
         const data = isFavorite.filter((favId) => favId !== id_song);
-        saveFavoriteSongsIds(data);
         setIsFavorite(data);
+        (!data.length) ? removeLocalstorageItem() : saveFavoriteSongsIds(data);
+
     }
 
     function handleChoiceSong(index) {
