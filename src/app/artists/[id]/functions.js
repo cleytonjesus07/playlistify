@@ -1,5 +1,4 @@
 import { getAllSongs } from "@/app/functions";
-import { getArtists } from "@/functions/api";
 import { decodeURL } from "@/functions/serverUtils/utils";
 import { getAllArtists } from "../functions";
 

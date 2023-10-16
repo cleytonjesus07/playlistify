@@ -4,10 +4,7 @@ import { RiCloseLine } from "react-icons/ri"
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useCurrentSong } from "@/store/currentSong";
-import { getTimesPlayedBySongId, updateTimesPlayed } from "@/functions/api";
-
-
-
+import { getTimesPlayedByCategoryId, getTimesPlayedBySongId, updateTimesPlayed } from "@/functions/api";
 
 export default function AudioPlayer() {
     const [show, setShow] = useState(false);
@@ -15,6 +12,7 @@ export default function AudioPlayer() {
     const [sentApiRequest, setSentApiRequest] = useState(false);
 
     useEffect(() => {
+
         return () => {
             setCurrentSong(undefined);
             setShow(false);
@@ -39,9 +37,18 @@ export default function AudioPlayer() {
     async function handleEnd() {
         setIsPlaying(false);
         if (sentApiRequest) return;
-        let count = await getTimesPlayedBySongId(currentSong.Song.id);
-        count += 1;
-        const res = await updateTimesPlayed({ id: currentSong.Song.id, count });
+        const data = {
+            Song: {
+                currentSongId: currentSong.Song.id,
+                countSong: (await getTimesPlayedBySongId(currentSong.Song.id) + 1)
+            },
+            Category: {
+                currentCategoryId: currentSong.Category.id,
+                countCategory: (await getTimesPlayedByCategoryId(currentSong.Category.id) + 1)
+            }
+        }
+
+        const res = await updateTimesPlayed(data)
         if (!res) {
             setSentApiRequest(false);
             return;
