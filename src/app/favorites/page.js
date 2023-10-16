@@ -17,3 +17,5 @@ export default async function Favorites() {
         </div>
     )
 }
+
+export const revalidate = 0;
