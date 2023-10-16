@@ -30,11 +30,11 @@ export function setItemWithExpiry(key, value) {
     const expiry = new Date(now.getTime() + 24 * 60 * 60 * 1000); // minutos para milissegundos
 
     const item = {
-        value: value,
+        value,
         expiry: expiry.getTime(),
     };
 
-    localStorage.setItem(key, JSON.stringify(item));
+    localStorage.setItem(key, encodeURL(JSON.stringify(item)));
 }
 
 export function getItemWithExpiry(key) {
@@ -44,7 +44,7 @@ export function getItemWithExpiry(key) {
         return null; // O item não existe
     }
 
-    const item = JSON.parse(itemStr);
+    const item = JSON.parse(decodeURL(itemStr));
     const now = new Date();
 
     if (now.getTime() > item.expiry) {
