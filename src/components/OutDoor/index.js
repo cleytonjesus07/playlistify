@@ -20,6 +20,7 @@ export default function OutDoor({ artists }) {
         } else {
             const artist = selectRandomArtist(artists);
             setItemWithExpiry(key, artist);
+            setArtistOfTheDay(artist);
         }
     }, [])
 
