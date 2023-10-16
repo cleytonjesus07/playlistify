@@ -53,7 +53,13 @@ Application Screens 📱(Mobile)
 
 ### List of Songs Marked as Favorites:
 
-No songs selected ![](./pics/mobile/noFavorites.jpeg) With songs selected ![](./pics/mobile/favorites.jpeg)
+No songs selected 
+
+![](./pics/mobile/noFavorites.jpeg)
+
+ With songs selected
+ 
+ ![](./pics/mobile/favorites.jpeg)
 
 * * *
 
@@ -120,7 +126,13 @@ Telas da aplicação 📱(Mobile)
 
 ### Lista de músicas selecionadas como favoritas:
 
-Sem nenhuma música ![](./pics/mobile/noFavorites.jpeg) Com músicas ![](./pics/mobile/favorites.jpeg)
+Sem nenhuma música 
+
+![](./pics/mobile/noFavorites.jpeg) 
+
+Com músicas
+
+ ![](./pics/mobile/favorites.jpeg)
 
 * * *
 
