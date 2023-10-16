@@ -22,3 +22,35 @@ export function shuffleArray(array) {
 
     return shuffledArray; // Retorna o array embaralhado
 }
+
+
+
+export function setItemWithExpiry(key, value) {
+    const now = new Date();
+    const expiry = new Date(now.getTime() + 24 * 60 * 60 * 1000); // minutos para milissegundos
+
+    const item = {
+        value: value,
+        expiry: expiry.getTime(),
+    };
+
+    localStorage.setItem(key, JSON.stringify(item));
+}
+
+export function getItemWithExpiry(key) {
+    const itemStr = localStorage.getItem(key);
+
+    if (!itemStr) {
+        return null; // O item não existe
+    }
+
+    const item = JSON.parse(itemStr);
+    const now = new Date();
+
+    if (now.getTime() > item.expiry) {
+        /* localStorage.removeItem(key); */ // O item expirou, remova-o
+        return null;
+    }
+
+    return item.value;
+}
