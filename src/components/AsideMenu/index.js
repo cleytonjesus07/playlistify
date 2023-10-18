@@ -14,7 +14,7 @@ export default function AsideMenu({ setShow, lang }) {
     const pathname = usePathname();
 
     return (
-        <Container className="fixed p-5 w-[255px] max-md:top-0 max-md:bottom-0 max-md:right-0 max-md:left-0 max-md:z-50 max-md:rounded-none ">
+        <Container className="fixed p-5 md:w-[255px] max-md:top-0 max-md:bottom-0 max-md:right-0 max-md:left-0 max-md:z-50 max-md:rounded-none ">
             <div className="flex relative justify-center items-center">
                 <Logo />
                 <button onClick={() => setShow(old => !old)} className="absolute right-2 top-0 md:hidden">
@@ -37,7 +37,7 @@ export default function AsideMenu({ setShow, lang }) {
             </nav>
             <div className="flex gap-1 flex-col justify-center items-center border-t-2 border-senary-color py-2">
                 <span className="text-senary-color text-sm font-semibold">{t.Homepage.language.title}</span>
-                <div className="flex w-full gap-2 justify-evenly">
+                <div className="flex w-full max-md:gap-5 max-md:justify-center md:justify-evenly">
                     <Link href={`${pathname.replace(/\/en-US\/|\/en-US/, '/pt-BR/')}`} className={`px-2 text-sm rounded-md bg-senary-color text-white ${lang === "pt-BR" ? "opacity-100" : "opacity-50"}`}>{t.Homepage.language.pt}</Link>
                     <Link href={`${pathname.replace(/\/pt-BR\/|\/pt-BR/, '/en-US/')}`} className={`px-2 text-sm rounded-md bg-senary-color text-white ${lang === "en-US" ? "opacity-100" : "opacity-50"}`}>{t.Homepage.language.en}</Link>
                 </div>
