@@ -14,7 +14,7 @@ export default function AsideMenu({ setShow, lang }) {
     const pathname = usePathname();
 
     return (
-        <Container className="fixed p-5 max-md:top-0 max-md:bottom-0 max-md:right-0 max-md:left-0 max-md:z-50 max-md:rounded-none ">
+        <Container className="fixed p-5 w-[255px] max-md:top-0 max-md:bottom-0 max-md:right-0 max-md:left-0 max-md:z-50 max-md:rounded-none ">
             <div className="flex relative justify-center items-center">
                 <Logo />
                 <button onClick={() => setShow(old => !old)} className="absolute right-2 top-0 md:hidden">
@@ -35,11 +35,11 @@ export default function AsideMenu({ setShow, lang }) {
                     <a className={`text-senary-color ${pathname == "/favorites" && "!bg-senary-color !text-primary-color"} hover:bg-senary-color hover:text-primary-color rounded-xl p-2 transition-all ease-in-out flex items-center gap-2`} href={`/${lang}/favorites`}><MdFavorite className="w-6 h-6" />{t.Homepage.menu.your_favorites}</a>
                 </div>
             </nav>
-            <div className="flex flex-col justify-center items-center border-t-2 border-senary-color">
+            <div className="flex gap-1 flex-col justify-center items-center border-t-2 border-senary-color py-2">
                 <span className="text-senary-color text-sm font-semibold">{t.Homepage.language.title}</span>
-                <div className="flex gap-2">
-                    <Link href={`${pathname.replace("en-US", "pt-BR")}`} className={`px-2 text-sm rounded-md bg-senary-color text-white ${lang === "pt-BR" ? "opacity-100" : "opacity-50"}`}>{t.Homepage.language.pt}</Link>
-                    <Link href={`${pathname.replace("pt-BR", "en-US")}`} className={`px-2 text-sm rounded-md bg-senary-color text-white ${lang === "en-US" ? "opacity-100" : "opacity-50"}`}>{t.Homepage.language.en}</Link>
+                <div className="flex w-full gap-2 justify-evenly">
+                    <Link href={`${pathname.replace(/\/en-US\/|\/en-US/, '/pt-BR/')}`} className={`px-2 text-sm rounded-md bg-senary-color text-white ${lang === "pt-BR" ? "opacity-100" : "opacity-50"}`}>{t.Homepage.language.pt}</Link>
+                    <Link href={`${pathname.replace(/\/pt-BR\/|\/pt-BR/, '/en-US/')}`} className={`px-2 text-sm rounded-md bg-senary-color text-white ${lang === "en-US" ? "opacity-100" : "opacity-50"}`}>{t.Homepage.language.en}</Link>
                 </div>
             </div>
         </Container>
