@@ -33,7 +33,7 @@ export default function OutDoor({ artists, lang }) {
     return (
         <Link href={`/artists/${encodeURL(artistOfTheDay.id)}`}>
             <div style={{ backgroundImage: "url(" + artistOfTheDay.avatar + ")" }} className="relative flex justify-center items-center w-full h-60 rounded-xl border-8 border-solid border-senary-color bg-senary-color max-md:flex bg-top bg-cover bg-no-repeat max-md:bg-[100%]">
-                <div className="z-20 flex h-full w-full">
+                <div className="z-10 flex h-full w-full">
                     <div className="relative w-60 h-full max-md:hidden">
                         <Image alt={artistOfTheDay.name} src={artistOfTheDay.avatar} fill={true} className="object-cover" />
                     </div>

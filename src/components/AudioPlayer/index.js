@@ -62,7 +62,7 @@ export default function AudioPlayer({ lang }) {
     }
 
     return (
-        <div className={`max-md:top-0 max-md:bottom-0 max-md:right-0 max-md:left-0 max-md:h-full max-md:max-h-full flex justify-center max-h-20 fixed bottom-0 bg-senary-color right-0 left-0`}>
+        <div className={`z-20 max-md:top-0 max-md:bottom-0 max-md:right-0 max-md:left-0 max-md:h-full max-md:max-h-full flex justify-center max-h-20 fixed bottom-0 bg-senary-color right-0 left-0`}>
             <button onClick={() => {
                 setCurrentSong(undefined);
                 setIsPlaying(false);
