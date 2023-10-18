@@ -5,14 +5,15 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useCurrentSong } from "@/store/currentSong";
 import { getTimesPlayedByCategoryId, getTimesPlayedBySongId, updateTimesPlayed } from "@/functions/api";
+import get_dictionary from "../../../dictionaries/get_dictionary";
 
-export default function AudioPlayer() {
+export default function AudioPlayer({ lang }) {
+    const t = get_dictionary(lang);
     const [show, setShow] = useState(false);
     const { currentSong, setCurrentSong, isPlaying, setIsPlaying } = useCurrentSong();
     const [sentApiRequest, setSentApiRequest] = useState(false);
 
     useEffect(() => {
-
         return () => {
             setCurrentSong(undefined);
             setShow(false);
@@ -72,7 +73,7 @@ export default function AudioPlayer() {
 
             <div className={`flex justify-center  py-2 max-w-[500px] max-md:justify-center max-md:items-center max-md:flex-col max-md:gap-5`}>
                 {/* Conteudo centralizado */}
-                <span className={`animate-pulse ml-5 font-extralight text-center text-xs max-md:text-3xl  ${show ? "hidden" : "flex"} text-white`}>Carregando...</span>
+                <span className={`animate-pulse ml-5 font-extralight text-center text-xs max-md:text-3xl  ${show ? "hidden" : "flex"} text-white`}>{t.loading_message}</span>
                 <div className={`${show ? "flex" : "hidden"} max-md:flex-col max-md:justify-center max-md:items-center max-md:gap-5`}>
                     <div>
                         <span className={`flex overflow-hidden justify-center items-center bg-gray-900 w-16 h-16 max-md:w-64 max-md:h-64 rounded-full relative ${isPlaying && "animate-spin "}`}>

@@ -16,7 +16,7 @@ export default async function Category({ params }) {
                 {artistsByCategories?.filter(({ Category }) => Category.title === decodeURL(params.slug))
                     .map(({ Category: { Artist } }) => (
                         Artist.map(({ id, name, avatar }) => (
-                            <Link key={id} href={`/artists/${encodeURL(id)}`}>
+                            <Link key={id} href={`/${params.lang}/artists/${encodeURL(id)}`}>
                                 <Card container_className={"p-5 scale-95 hover:scale-100 cursor-pointer transition-all ease-in-out flex flex-col justify-center items-center max-w-[200px]"} title_className={"block text-center text-senary-color font-extrabold line-clamp-1 break-normal"} name={name} avatar={avatar} />
                             </Link>
                         ))

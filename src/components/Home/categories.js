@@ -6,6 +6,7 @@ import { getArtistsByCategory } from "@/functions/api";
 import Link from "next/link";
 import { encodeURL } from "@/functions/serverUtils/utils";
 import { shuffleArray } from "@/functions/clientUtils/util";
+import get_dictionary from "../../../dictionaries/get_dictionary";
 
 async function getByCategory() {
     const res2 = await getArtistsByCategory();
@@ -25,7 +26,8 @@ async function getByCategory() {
     return newData;
 }
 
-export default async function Category() {
+export default async function Category({ lang }) {
+    const t = get_dictionary(lang);
     const categories = await getByCategory();
     return (
         <>
@@ -37,10 +39,10 @@ export default async function Category() {
                                 <GiCompactDisc className="w-8 h-8 colorDefault" />
                                 <h2 className="font-extrabold text-lg ml-5 text-senary-color">{title}</h2>
                             </div>
-                            <Link href={`/category/${encodeURL(title).replace(/=/g, '')}`} className="font-normal text-sm  text-senary-color hover:text-white hover:bg-senary-color px-2 rounded-md">Ver todas</Link>
+                            <Link href={`/category/${encodeURL(title).replace(/=/g, '')}`} className="font-normal text-sm  text-senary-color hover:text-white hover:bg-senary-color px-2 rounded-md">{t.Homepage.see_all}</Link>
                         </Container>
                         <Container className="flex gap-5 overflow-hidden">
-                            <Slide Artists={shuffleArray(Artists)} />
+                            <Slide lang={lang} Artists={shuffleArray(Artists)} />
                         </Container>
                     </React.Fragment>
                 )

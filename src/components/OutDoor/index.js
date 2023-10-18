@@ -3,15 +3,18 @@ import { encodeURL } from "@/functions/serverUtils/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import Loading from "@/app/loading";
+
 import { getItemWithExpiry, setItemWithExpiry } from "@/functions/clientUtils/util";
+import Loading from "@/app/[lang]/loading";
+import get_dictionary from "../../../dictionaries/get_dictionary";
 const key = "ArtistOfTheDay";
 
 function selectRandomArtist(artist) {
     const randomArtist = artist[Math.floor(Math.random() * artist.length)];
     return randomArtist;
 }
-export default function OutDoor({ artists }) {
+export default function OutDoor({ artists, lang }) {
+    const t = get_dictionary(lang);
     const [artistOfTheDay, setArtistOfTheDay] = useState(undefined)
     useEffect(() => {
         const getData = getItemWithExpiry(key);
@@ -35,7 +38,7 @@ export default function OutDoor({ artists }) {
                         <Image alt={artistOfTheDay.name} src={artistOfTheDay.avatar} fill={true} className="object-cover" />
                     </div>
                     <div className="flex-1 flex flex-col justify-center items-center max-sm:text-center ">
-                        <span className="text-white font-light mr-10 max-sm:mr-0">Artista do dia</span>
+                        <span className="text-white font-light mr-10 max-sm:mr-0">{t.Homepage.outdoor_message}</span>
                         <h3 className="text-white font-bold text-4xl max-sm:text-2xl">{artistOfTheDay.name}</h3>
                     </div>
                 </div>

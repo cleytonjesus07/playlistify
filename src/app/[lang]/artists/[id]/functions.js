@@ -1,6 +1,7 @@
-import { getAllSongs } from "@/app/functions";
+
 import { decodeURL } from "@/functions/serverUtils/utils";
 import { getAllArtists } from "../functions";
+import { getAllSongs } from "../../functions";
 
 export async function getAllArtistSongs(id_artist) {
     const res1 = await getAllSongs();

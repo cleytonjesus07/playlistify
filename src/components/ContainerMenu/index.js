@@ -2,7 +2,7 @@
 import { useState } from "react";
 import AsideMenu from "../AsideMenu";
 import { ImMenu } from "react-icons/im";
-export default function ContainerMenu() {
+export default function ContainerMenu({ lang }) {
     const [show, setShow] = useState(false);
     return (
         <>
@@ -10,7 +10,7 @@ export default function ContainerMenu() {
                 <ImMenu className=" text-white" />
             </button>
             <div className={`max-w-xs w-52 p-5 ${!show && "max-md:hidden"}`}>
-                <AsideMenu setShow={setShow} />
+                <AsideMenu lang={lang} setShow={setShow} />
             </div>
         </>
     )
