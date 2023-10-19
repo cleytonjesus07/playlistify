@@ -39,7 +39,7 @@ export default async function Category({ lang }) {
                                 <GiCompactDisc className="w-8 h-8 colorDefault" />
                                 <h2 className="font-extrabold text-lg ml-5 text-senary-color">{title}</h2>
                             </div>
-                            <Link href={`/category/${encodeURL(title).replace(/=/g, '')}`} className="font-normal text-sm  text-senary-color hover:text-white hover:bg-senary-color px-2 rounded-md">{t.Homepage.see_all}</Link>
+                            <Link href={`/${lang}/category/${encodeURL(title).replace(/=/g, '')}`} className="font-normal text-sm  text-senary-color hover:text-white hover:bg-senary-color px-2 rounded-md">{t.Homepage.see_all}</Link>
                         </Container>
                         <Container className="flex gap-5 overflow-hidden">
                             <Slide lang={lang} Artists={shuffleArray(Artists)} />
