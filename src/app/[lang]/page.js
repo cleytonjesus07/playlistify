@@ -20,13 +20,13 @@ export default async function Home({ params: { lang } }) {
     return (
         <div className="flex flex-col gap-5">
             <div className="flex flex-col overflow-x-hidden relative">
-                <span className="text-sm text-white bg-senary-color px-4 py-1 rounded-md select-none max-md:text-right">Adicionados recentemente</span>
+                <span className="text-sm text-white bg-senary-color px-4 py-1 rounded-md select-none max-md:text-right">{t.Homepage.recents_songs.title}</span>
                 <div className="flex py-2  movingToLeft relative gap-5">
                     {recentsSongs.map(({ Song: { id, title }, Artist: { name } }) => {
                         return (
                             <div className="bg-primary-color flex flex-col w-[200px]  rounded-md text-senary-color font-extralight select-none border-4 border-solid border-senary-color whitespace-nowrap" key={id}>
-                                <span className="max-sm:block flex-1 items-center flex text-sm font-extrabold p-1 max-sm:text-center "> {title}</span>
-                                <span className=" bg-senary-color text-xs p-1 text-white max-sm:hidden">{t.Homepage.recents_songs.label} {name}</span>
+                                <span className="max-sm:block flex-1 items-center flex text-sm font-extrabold p-1  "> {title}</span>
+                                <span className=" bg-senary-color text-xs p-1 text-white ">{t.Homepage.recents_songs.label} {name}</span>
                             </div>
                         )
                     })}

@@ -1,6 +1,7 @@
 export default {
     Homepage: {
         recents_songs: {
+            title: "Recently added",
             label: "by"
         },
         outdoor_message: "Artist of the day",
