@@ -1,5 +1,8 @@
 export default {
     Homepage: {
+        recents_songs: {
+            label: "by"
+        },
         outdoor_message: "Artist of the day",
         most_listening: {
             header: "Most listened artist",

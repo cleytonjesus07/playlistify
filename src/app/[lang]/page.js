@@ -26,7 +26,7 @@ export default async function Home({ params: { lang } }) {
                         return (
                             <div className="bg-primary-color flex flex-col w-[200px]  rounded-md text-senary-color font-extralight select-none border-4 border-solid border-senary-color" key={id}>
                                 <span className="max-sm:block flex-1 items-center flex text-sm font-extrabold p-1 max-sm:text-center"> {title}</span>
-                                <span className=" bg-senary-color text-xs p-1 text-white max-sm:hidden">by {name}</span>
+                                <span className=" bg-senary-color text-xs p-1 text-white max-sm:hidden">{t.Homepage.recents_songs.label} {name}</span>
                             </div>
                         )
                     })}
