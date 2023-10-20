@@ -31,7 +31,7 @@ export default function OutDoor({ artists, lang }) {
     if (typeof artistOfTheDay === "undefined") return <Loading />
 
     return (
-        <Link href={`/artists/${encodeURL(artistOfTheDay.id)}`}>
+        <Link href={`/${lang}/artists/${encodeURL(artistOfTheDay.id)}`}>
             <div style={{ backgroundImage: "url(" + artistOfTheDay.avatar + ")" }} className="relative flex justify-center items-center w-full h-60 rounded-xl border-8 border-solid border-senary-color bg-senary-color max-md:flex bg-top bg-cover bg-no-repeat max-md:bg-[100%]">
                 <div className="z-10 flex h-full w-full">
                     <div className="relative w-60 h-full max-md:hidden">

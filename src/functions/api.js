@@ -8,6 +8,14 @@ export const getSongs = async function getSongs() {
     return data;
 };
 
+export async function getRecents() {
+    /* Listando as músicas */
+    /* ok */
+    let { data, error } = await sbDB.from("Songs").select("id_song,title_song,Composers(id_composer,name_composer)").order("created_at", { ascending: false }).limit(4);
+    if (error) return console.error(error.message);
+    return data;
+};
+
 export async function getTimesPlayedBySongId(id) {
     const { data, error } = await sbDB
         .from('Songs').select("times_played").eq("id_song", id);

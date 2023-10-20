@@ -1,4 +1,4 @@
-import { getSongs } from "@/functions/api";
+import { getRecents, getSongs } from "@/functions/api";
 
 export async function getAllSongs() {
     const res1 = await getSongs();
@@ -16,6 +16,19 @@ export async function getAllSongs() {
         },
         Category: {
             id: id_category
+        }
+    })) || null;
+}
+export async function getRecentsSongs() {
+    const res1 = await getRecents();
+    return res1.map(({ id_song, title_song, Composers: { id_composer, name_composer } }) => ({
+        Song: {
+            id: id_song,
+            title: title_song
+        },
+        Artist: {
+            id: id_composer,
+            name: name_composer
         }
     })) || null;
 }

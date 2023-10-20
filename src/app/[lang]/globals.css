@@ -124,3 +124,17 @@ audio::-webkit-media-controls-panel {
     transform: scaleY(1.2);
   }
 }
+
+.movingToLeft {
+  animation: moveToLeft 30s linear infinite;
+}
+
+@keyframes moveToLeft {
+  from {
+    left: -100%;
+  }
+
+  to {
+    left: 100%;
+  }
+}
