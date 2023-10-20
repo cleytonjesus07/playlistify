@@ -20,7 +20,7 @@ export default async function Home({ params: { lang } }) {
     return (
         <div className="flex flex-col gap-5">
             <div className="flex flex-col overflow-x-hidden relative">
-                <span className="text-sm text-white bg-senary-color px-4 py-1 rounded-md select-none max-sm:text-right">Adicionados recentemente</span>
+                <span className="text-sm text-white bg-senary-color px-4 py-1 rounded-md select-none max-md:text-right">Adicionados recentemente</span>
                 <div className="flex py-2  movingToLeft relative gap-5">
                     {recentsSongs.map(({ Song: { id, title }, Artist: { name } }) => {
                         return (
