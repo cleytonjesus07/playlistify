@@ -170,3 +170,53 @@ audio::-webkit-media-controls-panel {
 *::-webkit-scrollbar-thumb:active {
   background-color: #af7fc2;
 }
+
+/* ---------------------------------------------- */
+
+.progressBar {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  /* Cor de fundo da barra de progresso */
+  border-radius: 5px;
+  outline: none;
+  /* Remove o contorno padrão */
+  padding: 0;
+  position: relative;
+}
+
+.progressBar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  /* Largura do thumb */
+  height: 15px;
+  /* Altura do thumb */
+  border-radius: 50%;
+  /* Deixa o thumb redondo */
+  background: #af7fc2;
+  /* Cor do thumb */
+  cursor: pointer;
+  position: relative;
+}
+
+.player {
+  left: -100%;
+}
+
+.toRight {
+
+  animation: to-right 300ms ease-in-out forwards !important;
+}
+
+@keyframes to-right {
+  from {
+
+    left: -100%;
+  }
+
+  to {
+
+    left: 1rem;
+  }
+}

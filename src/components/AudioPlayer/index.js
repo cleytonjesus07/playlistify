@@ -1,42 +1,164 @@
 "use client"
-import { GiLoveSong } from "react-icons/gi"
 import { RiCloseLine } from "react-icons/ri"
-import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useCurrentSong } from "@/store/currentSong";
 import { getTimesPlayedByCategoryId, getTimesPlayedBySongId, updateTimesPlayed } from "@/functions/api";
 import get_dictionary from "../../../dictionaries/get_dictionary";
+import Player from "./player";
+
 
 export default function AudioPlayer({ lang }) {
     const t = get_dictionary(lang);
-    const [show, setShow] = useState(false);
-    const { currentSong, setCurrentSong, isPlaying, setIsPlaying } = useCurrentSong();
+    const audioRef = useRef();
+    const [isPlayerReady, setIsPlayerReady] = useState(false);
+    const { currentSong, setCurrentSong } = useCurrentSong();
+    const [isPaused, setIsPaused] = useState(true);
     const [sentApiRequest, setSentApiRequest] = useState(false);
-
+    const [repeat, setRepeat] = useState(false);
+    const [activeVolume, setActiveVolume] = useState(false);
+    const [volume, setVolume] = useState(100);
+    const [timer, setTimer] = useState({
+        duration: 0,
+        currentTime: 0,
+        progress: 0
+    })
     useEffect(() => {
         return () => {
             setCurrentSong(undefined);
-            setShow(false);
+            setIsPlayerReady(false);
         };
     }, [])
 
+    function handleIsPlayerReady(isPlayerReady) {
+        setIsPlayerReady(isPlayerReady);
+    }
 
-    useEffect(() => {
-        setIsPlaying(false);
-    }, [currentSong])
+    function handleApiRequest(sentApiRequest) {
+        setSentApiRequest(sentApiRequest)
+    }
+
 
     if (typeof currentSong === "undefined") return;
 
-    function handlePlay() {
-        setIsPlaying(true)
-    }
 
-    function handlePause() {
-        setIsPlaying(false)
-    }
+    return (
+        <div className="fixed  bottom-2  left-2  max-md:top-0 max-md:!bottom-0 max-md:right-0 max-md:left-0 max-md:h-full max-md:max-h-full ">
+            <div className={` h-full !z-20 player ${isPlayerReady && "toRight"} flex  justify-center    bg-senary-color  p-2 rounded-md`}>
+                <div className={`flex  py-2 max-w-[500px] max-md:justify-center max-md:items-center max-md:flex-col max-md:gap-5`}>
+                    {/* Conteudo centralizado */}
+
+                    <Player props={{
+                        activeVolume,
+                        setActiveVolume,
+                        repeat,
+                        setRepeat,
+                        timer,
+                        audioRef,
+                        setTimer,
+                        isPaused,
+                        setIsPaused,
+                        avatar: currentSong?.Artist?.avatar,
+                        title: currentSong?.Song?.title,
+                        sentApiRequest,
+                        handleApiRequest,
+                        handleIsPlayerReady
+                    }} />
+
+
+                    {/* ---------------- */}
+                    <TagAudio props={{
+                        repeat,
+                        audioRef,
+                        isPaused,
+                        setIsPaused,
+                        src: currentSong?.Song?.url,
+                        sentApiRequest,
+                        handleApiRequest,
+                        handleIsPlayerReady,
+                        setTimer,
+                        volume,
+                        currentSong
+                    }} />
+                    <button onClick={() => {
+                        setActiveVolume(false);
+                        setCurrentSong(undefined);
+                        handleIsPlayerReady(false);
+                        handleApiRequest(false);
+                        setIsPaused(true);
+                        setTimer({ duration: 0, currentTime: 0, progress: 0 })
+                    }} className="absolute right-1 top-1 opacity-50 hover:opacity-100 transition-all ease-in-out">
+                        <RiCloseLine className="w-6 h-6 text-white" />
+                    </button>
+                </div>
+            </div >
+            <div
+                style={{ zIndex: -10 }}
+                className={` 
+                max-md:hidden
+                absolute
+                bottom-[50%]
+                w-full
+            ${activeVolume && "!bottom-[90%]"} 
+            pb-5
+            bg-senary-color
+            transition-all
+            ease-linear
+            text-xs
+            flex
+            items-center
+            justify-center
+            text-white
+            p-2
+            rounded-t-md
+            
+            `
+                }>
+                <span>{volume}%</span>
+                <input
+                    value={volume}
+                    min="0"
+                    max="100"
+                    step="1"
+                    type="range"
+                    className={`
+                progressBar
+                max-md:w-[20em]
+                w-[15em]
+                bg-transparent
+                rounded-md
+                `}
+                    onChange={({ target: { value } }) => {
+                        setVolume(parseInt(value))
+                        audioRef.current.volume = value / 100;
+                    }}
+                />
+                <span>100%</span>
+            </div>
+        </div>
+    )
+}
+
+
+function TagAudio({ props }) {
+
+    const {
+        repeat,
+        audioRef,
+        isPaused,
+        setIsPaused,
+        src,
+        sentApiRequest,
+        handleApiRequest,
+        handleIsPlayerReady,
+        setTimer,
+        volume,
+        currentSong
+    } = props;
+
+
+
 
     async function handleEnd() {
-        setIsPlaying(false);
         if (sentApiRequest) return;
         const data = {
             Song: {
@@ -51,46 +173,42 @@ export default function AudioPlayer({ lang }) {
 
         const res = await updateTimesPlayed(data)
         if (!res) {
-            setSentApiRequest(false);
+            handleApiRequest(false);
             return;
         };
-        setSentApiRequest(true);
+        handleApiRequest(true);
     }
 
-    function handleCanPlay() {
-        setShow(true);
-    }
+    useEffect(() => {
+        isPaused ? audioRef.current.pause() : audioRef.current.play();
+    }, [isPaused])
+    useEffect(() => {
+        audioRef.current.volume = volume / 100;
+    }, [])
 
-    return (
-        <div className={`z-20 max-md:top-0 max-md:bottom-0 max-md:right-0 max-md:left-0 max-md:h-full max-md:max-h-full flex justify-center max-h-20 fixed bottom-0 bg-senary-color right-0 left-0`}>
-            <button onClick={() => {
-                setCurrentSong(undefined);
-                setIsPlaying(false);
-                setSentApiRequest(false);
-            }} className="absolute right-1 top-1 opacity-50 hover:opacity-100 transition-all ease-in-out">
-                <RiCloseLine className="w-6 h-6 text-white" />
-            </button>
 
-            <div className={`flex justify-center  py-2 max-w-[500px] max-md:justify-center max-md:items-center max-md:flex-col max-md:gap-5`}>
-                {/* Conteudo centralizado */}
-                <span className={`animate-pulse ml-5 font-extralight text-center text-xs max-md:text-3xl  ${show ? "hidden" : "flex"} text-white`}>{t.loading_message}</span>
-                <div className={`${show ? "flex" : "hidden"} max-md:flex-col max-md:justify-center max-md:items-center max-md:gap-5`}>
-                    <div>
-                        <span className={`flex overflow-hidden justify-center items-center bg-gray-900 w-16 h-16 max-md:w-64 max-md:h-64 rounded-full relative ${isPlaying && "animate-spin "}`}>
-                            <span className="block z-30 bg-senary-color w-5 h-5 max-md:w-10 max-md:h-10 rounded-full border-solid border border-gray-400" ></span>
-                            {currentSong?.Artist?.avatar && <Image alt={"artist image"} title={"artist image"} fill={true} size="100%" className="object-cover object-center" src={currentSong?.Artist?.avatar} />}
-                        </span>
-                    </div>
-                    <div className=" flex flex-col justify-center items-center text-white max-md:gap-5">
-                        <span className="flex gap-2 items-center max-md:text-xl max-md:text-center"><GiLoveSong />{currentSong?.Song?.title}</span>
-                        <div className={`w-full h-full `}>
-                            <audio onCanPlayThrough={handleCanPlay} onEnded={handleEnd} onPlay={handlePlay} onPause={handlePause} className={`scale-75 custom-audio max-md:scale-100`} controls src={currentSong?.Song?.url} />
-                        </div>
-                    </div>
-                </div>
-                {/* ---------------- */}
-            </div>
-        </div >
-    )
 
+
+    return <audio
+        ref={audioRef}
+        onTimeUpdate={({ target }) => {
+            const currentTime = target.currentTime;
+            const progress = (currentTime / target.duration) * 100;
+            setTimer((old) => ({ ...old, currentTime, progress }));
+        }}
+        onLoadedMetadata={({ target }) => {
+            const duration = target.duration;
+            setTimer(old => ({ ...old, duration }));
+        }}
+        onCanPlayThrough={() => {
+            handleIsPlayerReady(true)
+        }}
+        onEnded={handleEnd}
+        onPlay={() => setIsPaused(false)}
+        onPause={() => setIsPaused(true)}
+        className={`scale-75 custom-audio max-md:scale-100 hidden`}
+        src={src}
+        loop={repeat}
+    />
 }
+
