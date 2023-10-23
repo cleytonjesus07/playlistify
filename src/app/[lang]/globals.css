@@ -205,8 +205,7 @@ audio::-webkit-media-controls-panel {
 }
 
 .toRight {
-
-  animation: to-right 300ms ease-in-out forwards !important;
+  animation: to-right 900ms ease-in-out forwards !important;
 }
 
 @keyframes to-right {
