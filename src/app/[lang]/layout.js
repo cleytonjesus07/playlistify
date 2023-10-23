@@ -1,6 +1,6 @@
-import AudioPlayer from '@/components/AudioPlayer'
 import ContainerMenu from '@/components/ContainerMenu'
 import Background from "@/components/Background"
+import AudioPlayer from '@/components/AudioPlayer'
 
 export const metadata = {
   title: 'PlayListify',

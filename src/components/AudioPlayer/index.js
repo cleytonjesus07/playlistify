@@ -51,8 +51,8 @@ export default function AudioPlayer({ lang }) {
 
 
     return (
-        <div className="fixed  bottom-2  left-2  max-md:top-0 max-md:!bottom-0 max-md:right-0 max-md:left-0 max-md:h-full max-md:max-h-full ">
-            <div className={` h-full !z-20 player ${isPlayerReady && "toRight"} flex  justify-center    bg-senary-color  p-2 rounded-md`}>
+        <div className={`fixed player ${isPlayerReady && "toRight"} bottom-2  left-2  max-md:top-0 max-md:!bottom-0 max-md:right-0 max-md:left-0 max-md:h-full max-md:max-h-full`}>
+            <div className={` h-full flex  justify-center bg-senary-color  p-2 rounded-md`}>
                 <div className={`flex  py-2 max-w-[500px] max-md:justify-center max-md:items-center max-md:flex-col max-md:gap-5`}>
                     {/* Conteudo centralizado */}
 
@@ -114,34 +114,38 @@ export default function AudioPlayer({ lang }) {
             ease-linear
             text-xs
             flex
+            flex-col
             items-center
             justify-center
             text-white
             p-2
             rounded-t-md
-            
             `
                 }>
-                <span>{volume}%</span>
-                <input
-                    value={volume}
-                    min="0"
-                    max="100"
-                    step="1"
-                    type="range"
-                    className={`
+                <span>Volume</span>
+                <div className="flex">
+                    <span>{volume}%</span>
+                    <input
+                        value={volume}
+                        min="0"
+                        max="100"
+                        step="1"
+                        type="range"
+                        className={`
                 progressBar
                 max-md:w-[20em]
                 w-[15em]
                 bg-transparent
                 rounded-md
+                flex-1
                 `}
-                    onChange={({ target: { value } }) => {
-                        setVolume(parseInt(value))
-                        audioRef.current.volume = value / 100;
-                    }}
-                />
-                <span>100%</span>
+                        onChange={({ target: { value } }) => {
+                            setVolume(parseInt(value))
+                            audioRef.current.volume = value / 100;
+                        }}
+                    />
+                    <span>100%</span>
+                </div>
             </div>
         </div>
     )

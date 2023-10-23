@@ -201,21 +201,19 @@ audio::-webkit-media-controls-panel {
 }
 
 .player {
-  left: -100%;
+  left: -50%;
 }
 
 .toRight {
-  animation: to-right 900ms ease-in-out forwards !important;
+  animation: to-right 100ms linear forwards !important;
 }
 
 @keyframes to-right {
   from {
-
-    left: -100%;
+    left: -50%;
   }
 
   to {
-
     left: 1rem;
   }
 }
