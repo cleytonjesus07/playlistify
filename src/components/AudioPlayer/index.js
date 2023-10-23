@@ -24,10 +24,19 @@ export default function AudioPlayer({ lang }) {
     })
     useEffect(() => {
         return () => {
+            setActiveVolume(false);
             setCurrentSong(undefined);
+            handleIsPlayerReady(false);
+            handleApiRequest(false);
+            setIsPaused(true);
+            setTimer({ duration: 0, currentTime: 0, progress: 0 })
             setIsPlayerReady(false);
         };
     }, [])
+
+    useEffect(() => {
+        setIsPaused(true);
+    }, [currentSong])
 
     function handleIsPlayerReady(isPlayerReady) {
         setIsPlayerReady(isPlayerReady);
