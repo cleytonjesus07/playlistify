@@ -26,6 +26,9 @@ export default {
         header: "All artists",
         artist: {
             role: "Artist"
+        },
+        player: {
+            next_song: "Next song: "
         }
     },
     Categoriespage: {

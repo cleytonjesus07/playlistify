@@ -3,14 +3,14 @@ import Playlist from "./playlist";
 import { redirect } from "next/navigation";
 import { getAllArtistSongs, getInfoArtist, getSongById } from "./functions";
 import get_dictionary from "../../../../../dictionaries/get_dictionary";
+import { decodeURL } from "@/functions/serverUtils/utils";
 
 export default async function Songs({ params }) {
     const t = await get_dictionary(params.lang)
     const [id_artist, id_song] = params.id.split("-");
     const artistSelected = await getInfoArtist(id_artist), songs = await getAllArtistSongs(id_artist);
-    const songRequired = typeof id_song !== "undefined" ? await getSongById(id_artist, id_song) : undefined;
+    const songRequired = typeof id_song !== "undefined" ? songs.findIndex(({ Song: { id } }) => (id === decodeURL(id_song))) : undefined;
     if (!artistSelected) redirect("/");
-
     return (
         <>
             <section className="flex max-md:flex-col max-md:items-center max-md:justify-center max-md:gap-5">

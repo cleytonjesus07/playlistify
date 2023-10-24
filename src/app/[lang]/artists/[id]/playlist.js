@@ -6,10 +6,12 @@ import { useCurrentSong } from "@/store/currentSong"
 import { getFavoriteSongsIds, removeLocalstorageItem, saveFavoriteSongsIds } from "@/functions/clientUtils/util"
 
 export default function Playlist({ artistSelected: { name }, songs, songRequired }) {
-    const { currentSong, setCurrentSong, isPlaying } = useCurrentSong();
+    const { setPlaylist, currentSong, isPlaying, setIndex } = useCurrentSong();
     const [isFavorite, setIsFavorite] = useState([]);
+
     useEffect(() => {
-        if (typeof songRequired !== "undefined") setCurrentSong(songRequired);
+        setPlaylist(songs);
+        if (typeof songRequired !== "undefined") setIndex(songRequired);
         const idsSongs = getFavoriteSongsIds();
         if (!idsSongs) return;
         setIsFavorite(idsSongs);
@@ -31,7 +33,7 @@ export default function Playlist({ artistSelected: { name }, songs, songRequired
     }
 
     function handleChoiceSong(index) {
-        setCurrentSong(songs[index]);
+        setIndex(index);
     }
 
     if (!songs) return (

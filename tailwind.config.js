@@ -21,7 +21,8 @@ module.exports = {
         "senary-color": "#61567d"
       },
       animation: {
-        toRight: "to-right 200ms linear forwards"
+        toRight: "to-right 200ms linear forwards",
+        movingToLeft: "movingToLeft 30s linear infinite"
       },
       keyframes: {
         "to-right": {
@@ -30,6 +31,14 @@ module.exports = {
           },
           "to": {
             left: "1rem"
+          }
+        },
+        "movingToLeft": {
+          "from": {
+            left: "-100%"
+          },
+          "to": {
+            left: "100%"
           }
         }
       }

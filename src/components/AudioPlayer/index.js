@@ -3,18 +3,18 @@ import { RiCloseLine } from "react-icons/ri"
 import { useState, useEffect, useRef } from "react";
 import { useCurrentSong } from "@/store/currentSong";
 import { getTimesPlayedByCategoryId, getTimesPlayedBySongId, updateTimesPlayed } from "@/functions/api";
-import get_dictionary from "../../../dictionaries/get_dictionary";
 import Player from "./player";
+import get_dictionary from "../../../dictionaries/get_dictionary";
 
 
 export default function AudioPlayer({ lang }) {
-    const t = get_dictionary(lang);
+    const t = get_dictionary(lang)
     const audioRef = useRef();
-    const [isPlayerReady, setIsPlayerReady] = useState(false);
-    const { currentSong, setCurrentSong } = useCurrentSong();
+    const { currentSong, setIndex } = useCurrentSong();
     const [isPaused, setIsPaused] = useState(true);
     const [sentApiRequest, setSentApiRequest] = useState(false);
     const [repeat, setRepeat] = useState(false);
+    const [repeatPlaylist, setRepeatPlaylist] = useState(false);
     const [activeVolume, setActiveVolume] = useState(false);
     const [volume, setVolume] = useState(100);
     const [timer, setTimer] = useState({
@@ -22,15 +22,27 @@ export default function AudioPlayer({ lang }) {
         currentTime: 0,
         progress: 0
     })
+
+    /*  useEffect(() => {
+         if (repeatPlaylist) {
+             setRepeat(false);
+             return;
+         }
+         if (repeat) {
+             setRepeatPlaylist(false);
+             return;
+         }
+     }, [repeatPlaylist, repeat]) */
+
     useEffect(() => {
         return () => {
+            setRepeatPlaylist(false);
             setActiveVolume(false);
-            setCurrentSong(undefined);
-            handleIsPlayerReady(false);
+            setIndex(undefined);
             handleApiRequest(false);
             setIsPaused(true);
+            setRepeat(false);
             setTimer({ duration: 0, currentTime: 0, progress: 0 })
-            setIsPlayerReady(false);
         };
     }, [])
 
@@ -38,29 +50,24 @@ export default function AudioPlayer({ lang }) {
         setIsPaused(true);
     }, [currentSong])
 
-    function handleIsPlayerReady(isPlayerReady) {
-        setIsPlayerReady(isPlayerReady);
-    }
-
     function handleApiRequest(sentApiRequest) {
         setSentApiRequest(sentApiRequest)
     }
 
-
-    if (typeof currentSong === "undefined") return;
-
+    if (currentSong === undefined) return;
 
     return (
-        <div className={`fixed player md:animate-toRight bottom-2  left-2  max-md:top-0 max-md:!bottom-0 max-md:right-0 max-md:left-0 max-md:h-full max-md:max-h-full`}>
+        <div className={`fixed  md:w-[16rem] player md:animate-toRight bottom-2  left-2  max-md:top-0 max-md:!bottom-0 max-md:right-0 max-md:left-0 max-md:h-full max-md:max-h-full overflow-x-hidden`}>
             <div className={` h-full flex  justify-center bg-senary-color  p-2 rounded-md`}>
                 <div className={`flex  py-2 max-w-[500px] max-md:justify-center max-md:items-center max-md:flex-col max-md:gap-5`}>
                     {/* Conteudo centralizado */}
-
                     <Player props={{
                         activeVolume,
                         setActiveVolume,
                         repeat,
                         setRepeat,
+                        repeatPlaylist,
+                        setRepeatPlaylist,
                         timer,
                         audioRef,
                         setTimer,
@@ -70,7 +77,7 @@ export default function AudioPlayer({ lang }) {
                         title: currentSong?.Song?.title,
                         sentApiRequest,
                         handleApiRequest,
-                        handleIsPlayerReady
+                        t
                     }} />
 
 
@@ -83,15 +90,16 @@ export default function AudioPlayer({ lang }) {
                         src: currentSong?.Song?.url,
                         sentApiRequest,
                         handleApiRequest,
-                        handleIsPlayerReady,
                         setTimer,
                         volume,
-                        currentSong
+                        setIndex,
+                        repeatPlaylist
                     }} />
                     <button onClick={() => {
+                        setRepeat(false);
+                        setRepeatPlaylist(false);
                         setActiveVolume(false);
-                        setCurrentSong(undefined);
-                        handleIsPlayerReady(false);
+                        setIndex(undefined);
                         handleApiRequest(false);
                         setIsPaused(true);
                         setTimer({ duration: 0, currentTime: 0, progress: 0 })
@@ -107,7 +115,7 @@ export default function AudioPlayer({ lang }) {
                 absolute
                 bottom-[50%]
                 w-full
-            ${activeVolume && "!bottom-[90%]"} 
+            ${activeVolume && "!bottom-[95%]"} 
             pb-5
             bg-senary-color
             transition-all
@@ -153,6 +161,7 @@ export default function AudioPlayer({ lang }) {
 
 
 function TagAudio({ props }) {
+    const { playlist, index, currentSong } = useCurrentSong();
 
     const {
         repeat,
@@ -162,34 +171,32 @@ function TagAudio({ props }) {
         src,
         sentApiRequest,
         handleApiRequest,
-        handleIsPlayerReady,
         setTimer,
         volume,
-        currentSong
+        setIndex,
+        repeatPlaylist
     } = props;
 
-
-
-
     async function handleEnd() {
-        if (sentApiRequest) return;
-        const data = {
-            Song: {
-                currentSongId: currentSong.Song.id,
-                countSong: (await getTimesPlayedBySongId(currentSong.Song.id) + 1)
-            },
-            Category: {
-                currentCategoryId: currentSong.Category.id,
-                countCategory: (await getTimesPlayedByCategoryId(currentSong.Category.id) + 1)
+        if (!sentApiRequest) {
+            const data = {
+                Song: {
+                    currentSongId: currentSong.Song.id,
+                    countSong: (await getTimesPlayedBySongId(currentSong.Song.id) + 1)
+                },
+                Category: {
+                    currentCategoryId: currentSong.Category.id,
+                    countCategory: (await getTimesPlayedByCategoryId(currentSong.Category.id) + 1)
+                }
             }
-        }
 
-        const res = await updateTimesPlayed(data)
-        if (!res) {
-            handleApiRequest(false);
-            return;
-        };
-        handleApiRequest(true);
+            const res = await updateTimesPlayed(data)
+            if (!res) {
+                handleApiRequest(false);
+                return;
+            };
+            handleApiRequest(true);
+        }
     }
 
     useEffect(() => {
@@ -204,6 +211,11 @@ function TagAudio({ props }) {
 
     return <audio
         ref={audioRef}
+        onCanPlayThrough={() => {
+            if (repeatPlaylist) {
+                setIsPaused(false);
+            }
+        }}
         onTimeUpdate={({ target }) => {
             const currentTime = target.currentTime;
             const progress = (currentTime / target.duration) * 100;
@@ -213,10 +225,13 @@ function TagAudio({ props }) {
             const duration = target.duration;
             setTimer(old => ({ ...old, duration }));
         }}
-        onCanPlayThrough={() => {
-            handleIsPlayerReady(true)
+        onEnded={({ target }) => {
+            handleEnd();
+            if (repeatPlaylist && playlist !== undefined) {
+                let nextIndex = ((index < playlist.length) ? (index + 1) : 0);
+                setIndex(nextIndex);
+            }
         }}
-        onEnded={handleEnd}
         onPlay={() => setIsPaused(false)}
         onPause={() => setIsPaused(true)}
         className={`scale-75 custom-audio max-md:scale-100 hidden`}

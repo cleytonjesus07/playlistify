@@ -125,20 +125,6 @@ audio::-webkit-media-controls-panel {
   }
 }
 
-.movingToLeft {
-  animation: moveToLeft 30s linear infinite;
-}
-
-@keyframes moveToLeft {
-  from {
-    left: -100%;
-  }
-
-  to {
-    left: 100%;
-  }
-}
-
 /* Chrome, Edge and Safari */
 *::-webkit-scrollbar {
   height: 9px;
@@ -202,18 +188,4 @@ audio::-webkit-media-controls-panel {
 
 .player {
   left: -50%;
-}
-
-.toRight {
-  animation: to-right 100ms linear forwards !important;
-}
-
-@keyframes to-right {
-  from {
-    left: -50%;
-  }
-
-  to {
-    left: 1rem;
-  }
 }

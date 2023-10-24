@@ -37,8 +37,8 @@ export default function OutDoor({ artists, lang }) {
                     <div className="relative w-60 h-full max-md:hidden">
                         <Image alt={artistOfTheDay.name} src={artistOfTheDay.avatar} fill={true} className="object-cover" />
                     </div>
-                    <div className="flex-1 flex flex-col justify-center items-center max-md:text-center ">
-                        <span className="text-white font-light mr-10 max-md:mr-0">{t.Homepage.outdoor_message}</span>
+                    <div className="flex-1 flex flex-col justify-center items-center max-lg:text-center ">
+                        <span className="text-white font-light mr-10 max-lg:mr-0">{t.Homepage.outdoor_message}</span>
                         <h3 className="text-white font-bold text-4xl max-md:text-2xl">{artistOfTheDay.name}</h3>
                     </div>
                 </div>
