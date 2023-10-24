@@ -35,7 +35,7 @@ export default function Player({ props }) {
         <div className={`flex flex-col gap-5 items-center max-md:flex-col max-md:justify-center max-md:items-center max-md:gap-5 `}>
             {(playlist) && (
                 <div className="text-xs text-white block max-md:text-center max-md:text-sm py-2 whitespace-nowrap w-full overflow-hidden">
-                    <span className="relative px-2  md:animate-movingToLeft">{(repeatPlaylist) ? `${t.Artistspage.player.next_song} ${playlist[(((index + 1) < playlist.length) ? (index + 1) : 0)].Song.title}` : ((index + 1) < playlist.length) ? `${t.Artistspage.player.next_song} ${playlist[(index + 1)].Song.title}` : ""}</span>
+                    <span className="relative px-2 md:animate-movingToLeft">{(repeatPlaylist) ? `${t.Artistspage.player.next_song} ${playlist[(((index + 1) < playlist.length) ? (index + 1) : 0)].Song.title}` : ((index + 1) < playlist.length) ? `${t.Artistspage.player.next_song} ${playlist[(index + 1)].Song.title}` : ""}</span>
                 </div>
             )}
             <div>
@@ -74,9 +74,9 @@ export default function Player({ props }) {
                 <div className="text-xs flex justify-center gap-2">
                     <span>{formatarDuracao(timer.currentTime)}</span> / <span>{formatarDuracao(timer.duration)}</span>
                 </div>
-                <div className="flex  items-center justify-center w-full gap-5">
+                <div className="grid grid-cols-6  w-full gap-5">
                     <BiSolidVolumeFull onClick={() => setActiveVolume(!activeVolume)} className={`max-md:hidden w-6 h-6 cursor-pointer ${!activeVolume && "opacity-50"} transition-opacity ease-in-out`} />
-                    {(!repeat) ? (repeatPlaylist ? <TbRepeat onClick={() => setRepeatPlaylist(false)} className="w-6 h-6 cursor-pointer transition-opacity opacity-100 hover:opacity-100 ease-in-out" /> : <TbRepeatOff onClick={() => setRepeatPlaylist(true)} className="w-6 h-6 cursor-pointer transition-opacity opacity-50 hover:opacity-100 ease-in-out" />) : ""}
+                    {(playlist.length > 1) ? (!repeat) ? (repeatPlaylist ? <TbRepeat onClick={() => setRepeatPlaylist(false)} className="w-6 h-6 cursor-pointer transition-opacity opacity-100 hover:opacity-100 ease-in-out" /> : <TbRepeatOff onClick={() => setRepeatPlaylist(true)} className="w-6 h-6 cursor-pointer transition-opacity opacity-50 hover:opacity-100 ease-in-out" />) : "" : ""}
                     <BsFillSkipBackwardCircleFill onClick={() => audioRef.current.currentTime -= 20} className="w-6 h-6 cursor-pointer transition-opacity opacity-50 hover:opacity-100 ease-in-out" />
                     <div className="scale-150">
                         {isPaused ? <AiFillPlayCircle onClick={() => setIsPaused(false)} className="w-6 h-6 cursor-pointer transition-opacity opacity-50 hover:opacity-100 ease-in-out" /> : <AiFillPauseCircle onClick={() => setIsPaused(true)} className="w-6 h-6 cursor-pointer transition-opacity opacity-50 hover:opacity-100 ease-in-out" />}

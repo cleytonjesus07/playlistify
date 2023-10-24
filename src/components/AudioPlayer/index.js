@@ -23,20 +23,8 @@ export default function AudioPlayer({ lang }) {
         progress: 0
     })
 
-    /*  useEffect(() => {
-         if (repeatPlaylist) {
-             setRepeat(false);
-             return;
-         }
-         if (repeat) {
-             setRepeatPlaylist(false);
-             return;
-         }
-     }, [repeatPlaylist, repeat]) */
-
     useEffect(() => {
         return () => {
-            setRepeatPlaylist(false);
             setActiveVolume(false);
             setIndex(undefined);
             handleApiRequest(false);
@@ -59,7 +47,7 @@ export default function AudioPlayer({ lang }) {
     return (
         <div className={`fixed  md:w-[16rem] player md:animate-toRight bottom-2  left-2  max-md:top-0 max-md:!bottom-0 max-md:right-0 max-md:left-0 max-md:h-full max-md:max-h-full`}>
             <div className={` h-full flex  justify-center bg-senary-color  p-2 rounded-md`}>
-                <div className={`flex  py-2 max-w-[500px] max-md:justify-center max-md:items-center max-md:flex-col max-md:gap-5`}>
+                <div className={`flex w-full py-2 max-w-[500px] max-md:justify-center max-md:items-center max-md:flex-col max-md:gap-5`}>
                     {/* Conteudo centralizado */}
                     <Player props={{
                         activeVolume,
@@ -211,22 +199,24 @@ function TagAudio({ props }) {
 
     return <audio
         ref={audioRef}
-        onCanPlayThrough={() => {
-            if (repeatPlaylist) {
+        onCanPlay={() => {
+            /* Tocar automáticamente */
+            if (repeatPlaylist || index !== undefined) {
                 setIsPaused(false);
             }
         }}
         onTimeUpdate={({ target }) => {
             const currentTime = target.currentTime;
             const progress = (currentTime / target.duration) * 100;
+            if (progress === 100) handleEnd();
             setTimer((old) => ({ ...old, currentTime, progress }));
+
         }}
         onLoadedMetadata={({ target }) => {
             const duration = target.duration;
             setTimer(old => ({ ...old, duration }));
         }}
-        onEnded={({ target }) => {
-            handleEnd();
+        onEnded={() => {
             if (repeatPlaylist && playlist !== undefined) {
                 let nextIndex = ((index < playlist.length) ? (index + 1) : 0);
                 setIndex(nextIndex);

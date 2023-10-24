@@ -11,13 +11,7 @@ export const useCurrentSong = create((set, get) => ({
         set(state => ({ ...state, currentSong, index }));
     },
     setIndex: (index) => {
-        if (typeof get().playlist === "undefined" || index === undefined) return get().setCurrentSong(undefined);
-        if (index < get().playlist.length) {
-            get().setCurrentSong(index);
-        } else {
-            get().setCurrentSong(0);
-        }
-
+        get().setCurrentSong((index === undefined || get().playlist === undefined) ? undefined : (index < get().playlist.length) ? index : 0);
     },
     setPlaylist: (songs) => { set(state => ({ ...state, playlist: songs })) }
 }))
