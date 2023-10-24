@@ -30,7 +30,6 @@ export default function AudioPlayer({ lang }) {
             handleApiRequest(false);
             setIsPaused(true);
             setRepeat(false);
-            setTimer({ duration: 0, currentTime: 0, progress: 0 })
         };
     }, [])
 
@@ -90,7 +89,7 @@ export default function AudioPlayer({ lang }) {
                         setIndex(undefined);
                         handleApiRequest(false);
                         setIsPaused(true);
-                        setTimer({ duration: 0, currentTime: 0, progress: 0 })
+                        setTimer({ duration: 0, currentTime: 0, progress: 0 });
                     }} className="absolute right-1 top-1 opacity-50 hover:opacity-100 transition-all ease-in-out">
                         <RiCloseLine className="w-6 h-6 text-white" />
                     </button>
@@ -213,6 +212,7 @@ function TagAudio({ props }) {
 
         }}
         onLoadedMetadata={({ target }) => {
+            setTimer({ duration: 0, currentTime: 0, progress: 0 });
             const duration = target.duration;
             setTimer(old => ({ ...old, duration }));
         }}
