@@ -19,6 +19,19 @@ module.exports = {
         "quaternary-color": "#9085d0",
         "quinary-color": "#8c76be",
         "senary-color": "#61567d"
+      },
+      animation: {
+        toRight: "to-right 200ms linear forwards"
+      },
+      keyframes: {
+        "to-right": {
+          "from": {
+            left: "-50%"
+          },
+          "to": {
+            left: "1rem"
+          }
+        }
       }
     },
   },
