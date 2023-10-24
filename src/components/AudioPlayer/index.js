@@ -57,7 +57,7 @@ export default function AudioPlayer({ lang }) {
     if (currentSong === undefined) return;
 
     return (
-        <div className={`fixed  md:w-[16rem] player md:animate-toRight bottom-2  left-2  max-md:top-0 max-md:!bottom-0 max-md:right-0 max-md:left-0 max-md:h-full max-md:max-h-full overflow-x-hidden`}>
+        <div className={`fixed  md:w-[16rem] player md:animate-toRight bottom-2  left-2  max-md:top-0 max-md:!bottom-0 max-md:right-0 max-md:left-0 max-md:h-full max-md:max-h-full`}>
             <div className={` h-full flex  justify-center bg-senary-color  p-2 rounded-md`}>
                 <div className={`flex  py-2 max-w-[500px] max-md:justify-center max-md:items-center max-md:flex-col max-md:gap-5`}>
                     {/* Conteudo centralizado */}
