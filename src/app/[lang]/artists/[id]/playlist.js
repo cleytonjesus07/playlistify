@@ -22,9 +22,6 @@ export default function Playlist({ artistSelected: { name }, songs, songRequired
         const idsSongs = getFavoriteSongsIds();
         if (!idsSongs) return;
         setIsFavorite(idsSongs);
-        return () => {
-            setCurrentArtist(undefined);
-        }
     }, [])
 
 
