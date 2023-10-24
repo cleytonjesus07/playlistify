@@ -149,7 +149,6 @@ export default function AudioPlayer({ lang }) {
 
 function TagAudio({ props }) {
     const { playlist, index, currentSong } = useCurrentSong();
-    const [prevIndex, setPrevIndex] = useState(index);
     const {
         repeat,
         audioRef,
