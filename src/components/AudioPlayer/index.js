@@ -149,7 +149,7 @@ export default function AudioPlayer({ lang }) {
 
 function TagAudio({ props }) {
     const { playlist, index, currentSong } = useCurrentSong();
-
+    const [prevIndex, setPrevIndex] = useState(index);
     const {
         repeat,
         audioRef,
@@ -164,6 +164,9 @@ function TagAudio({ props }) {
         repeatPlaylist
     } = props;
 
+    useEffect(() => {
+        handleApiRequest(false);
+    }, [index]);
     async function handleEnd() {
         if (!sentApiRequest) {
             const data = {
@@ -177,12 +180,7 @@ function TagAudio({ props }) {
                 }
             }
 
-            const res = await updateTimesPlayed(data)
-            if (!res) {
-                handleApiRequest(false);
-                return;
-            };
-            handleApiRequest(true);
+            return await updateTimesPlayed(data)
         }
     }
 
@@ -199,7 +197,6 @@ function TagAudio({ props }) {
     return <audio
         ref={audioRef}
         onCanPlay={() => {
-            /* Tocar automáticamente */
             if (repeatPlaylist || index !== undefined) {
                 setIsPaused(false);
             }
@@ -207,9 +204,7 @@ function TagAudio({ props }) {
         onTimeUpdate={({ target }) => {
             const currentTime = target.currentTime;
             const progress = (currentTime / target.duration) * 100;
-            if (progress === 100) handleEnd();
             setTimer((old) => ({ ...old, currentTime, progress }));
-
         }}
         onLoadedMetadata={({ target }) => {
             setTimer({ duration: 0, currentTime: 0, progress: 0 });
@@ -217,10 +212,16 @@ function TagAudio({ props }) {
             setTimer(old => ({ ...old, duration }));
         }}
         onEnded={() => {
-            if (repeatPlaylist && playlist !== undefined) {
-                let nextIndex = ((index < playlist.length) ? (index + 1) : 0);
-                setIndex(nextIndex);
-            }
+            handleEnd()
+                .then(() => {
+                    if (repeatPlaylist && playlist !== undefined) {
+                        let nextIndex = ((index < playlist.length) ? (index + 1) : 0);
+                        setIndex(nextIndex);
+                    }
+                    handleApiRequest(true);
+                }).catch(() => {
+                    handleApiRequest(false);
+                });
         }}
         onPlay={() => setIsPaused(false)}
         onPause={() => setIsPaused(true)}
