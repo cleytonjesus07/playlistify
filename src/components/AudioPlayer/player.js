@@ -32,7 +32,7 @@ export default function Player({ props }) {
     }
 
     return (
-        <div className={`flex flex-col gap-5 items-center max-md:flex-col max-md:justify-center max-md:items-center max-md:gap-5 `}>
+        <div className={`flex w-full flex-col gap-5 items-center max-md:flex-col max-md:justify-center max-md:items-center max-md:gap-5 `}>
             {(playlist) && (
                 <div className="text-xs text-white block max-md:text-center max-md:text-sm py-2 whitespace-nowrap w-full overflow-hidden">
                     <span className="relative px-2 md:animate-movingToLeft">{(repeatPlaylist) ? `${t.Artistspage.player.next_song} ${playlist[(((index + 1) < playlist.length) ? (index + 1) : 0)].Song.title}` : ((index + 1) < playlist.length) ? `${t.Artistspage.player.next_song} ${playlist[(index + 1)].Song.title}` : ""}</span>
