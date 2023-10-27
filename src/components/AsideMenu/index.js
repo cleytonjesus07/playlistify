@@ -14,7 +14,7 @@ export default function AsideMenu({ setShow, lang }) {
     const pathname = usePathname();
 
     return (
-        <Container className="fixed p-5 md:w-[255px] max-md:top-0 max-md:bottom-0 max-md:right-0 max-md:left-0 max-md:z-50 max-md:rounded-none ">
+        <Container className="fixed p-5 md:w-[255px] max-lg:top-0 max-lg:bottom-0 max-lg:right-0 max-lg:left-0 max-lg:z-50 max-lg:rounded-none ">
             <div className="flex relative justify-center items-center">
                 <Logo />
                 <button onClick={() => setShow(old => !old)} className="absolute right-2 top-0 md:hidden">

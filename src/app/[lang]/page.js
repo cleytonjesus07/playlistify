@@ -20,7 +20,7 @@ export default async function Home({ params: { lang } }) {
     return (
         <div className="flex flex-col gap-5">
             <div className="flex flex-col overflow-x-hidden relative">
-                <span className="text-sm text-white bg-senary-color px-4 py-1 rounded-md select-none max-md:text-right">{t.Homepage.recents_songs.title}</span>
+                <span className="text-sm text-white bg-senary-color px-4 py-1 rounded-md select-none max-lg:text-right">{t.Homepage.recents_songs.title}</span>
                 <div className="flex py-2  animate-movingToLeft relative gap-5">
                     {recentsSongs.map(({ Song: { id, title }, Artist: { name } }) => {
                         return (
@@ -37,7 +37,7 @@ export default async function Home({ params: { lang } }) {
                 <FaEarListen className="w-8 h-8 colorDefault" />
                 <h2 className="font-extrabold text-lg ml-5 text-senary-color">{t.Homepage.most_listening.header}</h2>
             </Container>
-            <Container className="flex max-lg:flex-col justify-center gap-2 overflow-hidden p-5 ">
+            <Container className="flex max-xl:flex-col justify-center gap-2 overflow-hidden p-5 ">
                 <MostListening lang={lang} mostListening={mostListening} />
             </Container>
             <Category lang={lang} />
