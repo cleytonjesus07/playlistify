@@ -24,8 +24,8 @@ export default async function Home({ params: { lang } }) {
                 <div className="flex py-2  animate-movingToLeft relative gap-5">
                     {recentsSongs.map(({ Song: { id, title }, Artist: { name } }) => {
                         return (
-                            <div className="bg-primary-color flex flex-col w-[200px]  rounded-md text-senary-color font-extralight select-none border-4 border-solid border-senary-color whitespace-nowrap" key={id}>
-                                <span className="max-sm:block flex-1 items-center flex text-sm font-extrabold p-1  "> {title}</span>
+                            <div className="bg-primary-color flex flex-col w-auto rounded-md text-senary-color font-extralight select-none border-4 border-solid border-senary-color whitespace-nowrap" key={id}>
+                                <span className="max-sm:block flex-1 items-center flex text-sm font-extrabold p-1 w-full line-clamp-1"> {title}</span>
                                 <span className=" bg-senary-color text-xs p-1 text-white ">{t.Homepage.recents_songs.label} {name}</span>
                             </div>
                         )
