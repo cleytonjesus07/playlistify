@@ -8,7 +8,6 @@ export const useCurrentSong = create((set, get) => ({
     currentArtist: undefined,
     setCurrentArtist: (currentArtist) => set(state => ({ ...state, currentArtist })),
     setCurrentSong: (index) => {
-        /* if ((typeof get().currentSong !== "undefined" && typeof currentSong !== "undefined") && get().currentSong.Song.id === currentSong.Song.id) return;*/
         const currentSong = (typeof get().playlist !== "undefined" || index !== undefined) ? get().playlist[index] : undefined;
         set(state => ({ ...state, currentSong, index }));
     },

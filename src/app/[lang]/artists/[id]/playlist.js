@@ -6,19 +6,20 @@ import { useCurrentSong } from "@/store/currentSong"
 import { getFavoriteSongsIds, removeLocalstorageItem, saveFavoriteSongsIds } from "@/functions/clientUtils/util"
 
 export default function Playlist({ artistSelected: { name }, songs, songRequired }) {
-    const { currentArtist, setCurrentArtist, setPlaylist, currentSong, setCurrentSong, isPlaying, setIndex } = useCurrentSong();
+    const { currentArtist, setCurrentArtist, setPlaylist, currentSong, setCurrentSong, setIndex } = useCurrentSong();
     const [isFavorite, setIsFavorite] = useState([]);
 
     useEffect(() => {
-        if (currentArtist === undefined || currentArtist !== name) {
+        if (currentArtist === undefined || currentArtist.name !== name) {
             setPlaylist(songs);
+            setCurrentArtist(name);
             setCurrentSong(undefined);
             setIndex(undefined);
         }
         if (typeof songRequired !== "undefined") {
             setIndex(songRequired)
         };
-        setCurrentArtist(name);
+
         const idsSongs = getFavoriteSongsIds();
         if (!idsSongs) return;
         setIsFavorite(idsSongs);
@@ -57,7 +58,7 @@ export default function Playlist({ artistSelected: { name }, songs, songRequired
                         < div className="bg-senary-color p-5 text-white">{i + 1}</div>
                         <div className={`flex-1 ${(currentSong?.Song?.id == Song.id) ? "text-white" : "text-senary-color"}`}>{Song.title}</div>
                         {/* WaveSound */}
-                        {((currentSong?.Song?.id === Song.id) && isPlaying) && (
+                        {((currentSong?.Song?.id === Song.id)) && (
                             <div className="flex gap-1 justify-self-end p-5 scale-75 soundWave">
                                 <span className=" block w-2 h-7 bg-white rounded-full box box1"></span>
                                 <span className=" block w-2 h-7 bg-white rounded-full box box2"></span>
