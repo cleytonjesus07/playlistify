@@ -74,7 +74,7 @@ export default function Player({ props }) {
                 <div className="text-xs flex justify-center gap-2">
                     <span>{formatarDuracao(timer.currentTime)}</span> / <span>{formatarDuracao(timer.duration)}</span>
                 </div>
-                <div className="grid grid-cols-6 max-md:grid-cols-5 justify-center w-full gap-5">
+                <div className={`grid ${(playlist.length > 1 ? "grid-cols-6" : "grid-cols-5 max-md:flex max-md:justify-around")} max-md:grid-cols-5 w-full gap-5`}>
                     <BiSolidVolumeFull onClick={() => setActiveVolume(!activeVolume)} className={`max-md:hidden w-6 h-6 cursor-pointer ${!activeVolume && "opacity-50"} transition-opacity ease-in-out`} />
                     {(playlist.length > 1) ? (!repeat) ? (repeatPlaylist ? <TbRepeat onClick={() => setRepeatPlaylist(false)} className="w-6 h-6 cursor-pointer transition-opacity opacity-100 hover:opacity-100 ease-in-out" /> : <TbRepeatOff onClick={() => setRepeatPlaylist(true)} className="w-6 h-6 cursor-pointer transition-opacity opacity-50 hover:opacity-100 ease-in-out" />) : "" : ""}
                     <BsFillSkipBackwardCircleFill onClick={() => audioRef.current.currentTime -= 20} className="w-6 h-6 cursor-pointer transition-opacity opacity-50 hover:opacity-100 ease-in-out" />
@@ -82,7 +82,7 @@ export default function Player({ props }) {
                         {isPaused ? <AiFillPlayCircle onClick={() => setIsPaused(false)} className="w-6 h-6 cursor-pointer transition-opacity opacity-50 hover:opacity-100 ease-in-out" /> : <AiFillPauseCircle onClick={() => setIsPaused(true)} className="w-6 h-6 cursor-pointer transition-opacity opacity-50 hover:opacity-100 ease-in-out" />}
                     </div>
                     <BsFillFastForwardCircleFill onClick={() => audioRef.current.currentTime += 20} className="w-6 h-6 cursor-pointer opacity-50 hover:opacity-100 transition-opacity ease-in-out" />
-                    <LuRepeat1 onClick={() => setRepeat(!repeat)} className={`w-6 h-6 cursor-pointer ${repeat ? "opacity-100" : "opacity-50"} transition-opacity ease-in-out ${repeatPlaylist && "hidden"}`} />
+                    <LuRepeat1 disabled={repeatPlaylist ? true : false} onClick={() => setRepeat(!repeat)} className={`w-6 h-6 disabled:cursor-not-allowed disabled:opacity-30 cursor-pointer ${repeat ? "opacity-100" : "opacity-50"} transition-opacity ease-in-out ${repeatPlaylist && "hidden"}`} />
                 </div>
             </div>
         </div>
