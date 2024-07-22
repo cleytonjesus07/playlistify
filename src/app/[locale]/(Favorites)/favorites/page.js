@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 export default function FavoritesPage({ params: { locale } }) {
     const [favoritesSongs, setFavoritesSongs] = useState();
     const t = useTranslations("Favoritespage");
+    const tLoading = useTranslations("");
     useEffect(() => {
         if (typeof localStorage === "undefined") return;
         const favoritesSongs = localStorage.getItem("favorites") !== null ? JSON.parse(localStorage.getItem("favorites")) : [];
@@ -14,11 +15,11 @@ export default function FavoritesPage({ params: { locale } }) {
 
     if (!favoritesSongs) {
         return <div className="text-center mt-10 text-xl">
-            Carregando
+            {tLoading("loading_message")}
             <span>.</span>
             <span>.</span>
             <span>.</span>
-        </div>
+        </div >
     }
 
     return (
@@ -29,9 +30,9 @@ export default function FavoritesPage({ params: { locale } }) {
                     favoritesSongs?.map((favs, i) => (
                         <li key={favs.song.id} >
                             <Link href={`/${locale}/artists/${favs.artist.id}~${favs.song.id}`} className='w-full'>
-                                <div className='bg-[#242424] relative flex items-center justify-center rounded-md w-full overflow-hidden  [&]:hover:bg-[rgb(73,73,73)] transition-colors [&>div:nth-child(2)]:hover:text-[#FFF] cursor-pointer h-20'>
-                                    <span className={`bg-unselected absolute top-0 left-0 text-[#242424] font-extrabold px-3 text-sm rounded-br-md`}>{i + 1}</span>
-                                    <div className='flex-1 mt-2 flex flex-col ml-4 font-extrabold'>
+                                <div className='bg-[#242424] h-full relative flex flex-col  justify-center rounded-md w-full overflow-hidden  [&]:hover:bg-[rgb(73,73,73)] transition-colors [&>div:nth-child(2)]:hover:text-[#FFF] cursor-pointer '>
+                                    <span className={`bg-unselected self-start  text-[#242424] font-extrabold px-3 text-sm rounded-br-md`}>{i + 1}</span>
+                                    <div className='flex-1  flex flex-col py-2 px-4  font-extrabold'>
                                         {favs.song.name}
                                         <i className="text-xs text-[rgb(135,135,135)]">{t("by")} {favs.artist.name}</i>
                                     </div>
