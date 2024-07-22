@@ -25,7 +25,7 @@ export default function Card({ square_rounded, avatar, title, name_composer, car
                 <span className={artistName()}>{title}</span>
                 <span className="text-sm">{name_composer ?? t("artist", { cardinals })}</span>
             </div>
-            <button className="play max-md:hidden opacity-0 flex items-center justify-center absolute w-12 h-12 bg-[#1ED760]  right-5 rounded-full animate-toHide   z-10 ">
+            <button title="icone de play" className="play max-md:hidden opacity-0 flex items-center justify-center absolute w-12 h-12 bg-[#1ED760]  right-5 rounded-full animate-toHide   z-10 ">
                 <FaPlay color="#000" size={20} />
             </button>
 
