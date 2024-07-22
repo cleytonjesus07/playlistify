@@ -1,0 +1,36 @@
+{
+    "Homepage": {
+        "songs_of_the_week": "Músicas da semana",
+        "artist": "{cardinals, plural, =0 {Artista} other {Artistas}}",
+        "see_all": "Ver tudo",
+        "language": {
+            "title": "Idioma",
+            "pt": "Português",
+            "en": "Inglês"
+        },
+        "menu": {
+            "home": "Início",
+            "artist_list": "Lista de Artistas",
+            "all_categories": "Todas as categorias",
+            "your_favorites": "Suas favoritas"
+        }
+    },
+    "Artistspage": {
+        "header": "Todos os artistas",
+        "artist": {
+            "role": "Artista"
+        },
+        "player": {
+            "next_song": "Próxima música: "
+        }
+    },
+    "Categoriespage": {
+        "header": "Todas as categorias"
+    },
+    "Favoritespage": {
+        "header": "Suas favoritas",
+        "by": "Por",
+        "empty_message": "Você ainda não selecionou nenhuma música como favorita"
+    },
+    "loading_message": "Carregando..."
+}

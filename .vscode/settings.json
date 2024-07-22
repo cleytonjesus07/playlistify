@@ -1,0 +1,5 @@
+{
+    "editor.formatOnSave": true,
+    "workbench.editor.enablePreview": true,
+    "explorer.compactFolders": false
+}
