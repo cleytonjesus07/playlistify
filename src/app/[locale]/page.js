@@ -16,6 +16,7 @@ export default async function Index({ params: { locale } }) {
   const sixSongsOfTheWeek = await getSixSongsOfTheWeek();
   const randomComposers = await getRandomComposers();
   const randomCategories = await getRandomCategories();
+  console.log(randomCategories)
   return (
     <div className='bg-[#121212]'>
       <Header />
@@ -30,11 +31,11 @@ export default async function Index({ params: { locale } }) {
       </Section>
       {/* Categorias */}
       {Object.keys(randomCategories).map((category) => (
-        <Section className={"max-md:grid-cols-1"} key={randomCategories[category][0].id_category} title={category} seeAll={true} locale={locale} href={`/${locale}/categories/${randomCategories[category][0].id_category}`}>
-          {randomCategories[category].map(({ id_song, image_composer, id_composer, title_song, name_composer }) => (
-            <li key={id_song}>
-              <Link href={`/${locale}/artists/${id_composer}~${id_song}`}>
-                <Card square_rounded={true} avatar={image_composer} title={title_song} name_composer={name_composer} />
+        <Section className={"max-md:grid-cols-1"} key={randomCategories[category].category_id} title={category} seeAll={true} locale={locale} href={`/${locale}/categories/${randomCategories[category].category_id}`}>
+          {randomCategories[category].songs.map(({ song_id, title, composer }) => (
+            <li key={song_id}>
+              <Link href={`/${locale}/artists/${composer.id}~${song_id}`}>
+                <Card square_rounded={true} avatar={composer.image} title={title} name_composer={composer.name} />
               </Link>
             </li>
           ))}

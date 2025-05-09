@@ -23,24 +23,8 @@ export async function getAllCategories() {
     return allCategories;
 }
 export async function getRandomCategories() {
-    let { data: randomCategories } = await supabase.from("five_categories_and_songs").select("*");
-
-    // Objeto para armazenar os resultados agrupados
-    const groupedData = randomCategories.reduce((acc, obj) => {
-        const key = obj.title_category;
-
-        // Verifica se já existe um array para essa categoria, se não, cria um novo
-        if (!acc[key]) {
-            acc[key] = [];
-        }
-
-        // Adiciona o objeto atual ao array correspondente à categoria
-        acc[key].push(obj);
-
-        return acc;
-    }, {});
-
-    return groupedData;
+    let { data: randomCategories } = await supabase.from("five_categories_and_songs_weekly").select("result").single();
+    return randomCategories.result;
 }
 export async function getSongsByCategory(categoryId) {
     let { data: allSongsByCategory } = await supabase.from("Songs").select("id_song,title_song,Composers(id_composer,image_composer)").eq("id_category", categoryId);
